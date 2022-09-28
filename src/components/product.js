@@ -45,7 +45,11 @@ export default function Product(props) {
         <div>
           <Amount quantity={product.qty} add={onAdd} remove={onRemove} />
         </div>
-        <p className="product_price">{`${product.totalPrice > 0 ? '$' + Number(product.totalPrice).toFixed(2) :  '$' + Number(product.price).toFixed(2)}`}</p>
+        <p className="product_price">
+            {product.qty > 0 ? 
+            `${product.totalPrice > 0 ? '$' + Number(product.totalPrice).toFixed(2) :  '$' + Number(product.price).toFixed(2)}`: '$0.00'
+        }
+            </p>
       </div>
     </div>
   )
