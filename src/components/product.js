@@ -9,12 +9,13 @@ export default function Product(props) {
   const updateAmount = () => {
  
     product.totalPrice = product.price * product.qty
+
   }
 
   const onAdd = () => {
     product.qty++
     updateAmount()
-    total(product.price, "+")
+    total(product.totalPrice, "+")
     if (amount === true) {
       setAmount(false)
     } else {
@@ -27,7 +28,7 @@ export default function Product(props) {
 
     product.qty--
     updateAmount()
-    total(product.price, "-")
+    total(product.totalPrice, "-")
     if (amount === true) {
       setAmount(false)
     } else {
