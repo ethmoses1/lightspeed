@@ -2,27 +2,32 @@ import React, { useEffect, useState } from 'react'
 import '../index.css'
 import Amount from './amount'
 export default function Product(props) {
-  let { product } = props
+  let { product, total } = props
   const [amount, setAmount] = useState(true)
+  const [original, setOriginal] = useState(0)
 
   const updateAmount = () => {
-    product.price = product.qty * product.price
+ 
+    product.totalPrice = product.price * product.qty
   }
 
   const onAdd = () => {
     product.qty++
     updateAmount()
+    total(product.price, "+")
     if (amount === true) {
       setAmount(false)
     } else {
       setAmount(true)
     }
+
   }
   const onRemove = () => {
     if (product.qty === 0) return
 
     product.qty--
     updateAmount()
+    total(product.price, "-")
     if (amount === true) {
       setAmount(false)
     } else {
@@ -40,7 +45,7 @@ export default function Product(props) {
         <div>
           <Amount quantity={product.qty} add={onAdd} remove={onRemove} />
         </div>
-        <p className="product_price">{`${product && '$' + Number(product.price).toFixed(2)}`}</p>
+        <p className="product_price">{`${product.totalPrice > 0 ? '$' + Number(product.totalPrice).toFixed(2) :  '$' + Number(product.price).toFixed(2)}`}</p>
       </div>
     </div>
   )

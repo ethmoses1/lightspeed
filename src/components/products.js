@@ -15,14 +15,19 @@ export default function Products() {
     for (let i = 0; i < response.data.length; i++) {
       totalAmount += Number(response.data[i].price)
       response.data[i]['qty'] = 1
+      response.data[i]['totalPrice'] = 0
     }
     setTotal(totalAmount)
     setProducts(response.data)
   }
-  //   const getTotal = ()=>{
-  //     let total = 0
-  //     for (let=0; i<products.len)
-  //   }
+    const getTotal = (amount, operation)=>{
+        if (operation === "+"){
+            setTotal(total+amount)
+        }else{
+            setTotal(total-amount)
+        }
+
+    }
 
   useEffect(() => {
     getAllProducts()
@@ -34,7 +39,7 @@ export default function Products() {
       <div className="products">
         {products &&
           products.map((product) => {
-            return <Product key={product.id} product={product} final={total} />
+            return <Product key={product.id} product={product} total={getTotal} />
           })}
         <div className="total">
           <p>Total</p> <p>${Number(total).toFixed(2)}</p>
